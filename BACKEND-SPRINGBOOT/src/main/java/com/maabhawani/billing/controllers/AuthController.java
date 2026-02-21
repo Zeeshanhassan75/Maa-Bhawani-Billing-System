@@ -4,17 +4,20 @@ import com.maabhawani.billing.dto.AuthenticationRequest;
 import com.maabhawani.billing.dto.AuthenticationResponse;
 import com.maabhawani.billing.dto.RegisterRequest;
 import com.maabhawani.billing.services.AuthService;
-import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
 @CrossOrigin(origins = "${cors.allowed.origins}")
-@RequiredArgsConstructor
 public class AuthController {
 
     private final AuthService authService;
+
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(

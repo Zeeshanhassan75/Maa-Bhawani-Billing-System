@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Invoice</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+
+        body {
+            font-family: sans-serif;
+            font-size: 11px;
+            color: #000;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        td,
+        th {
+            vertical-align: top;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .td-border {
+            border: 1px solid #000;
+            padding: 4px;
+        }
+
+        .no-border {
+            border: none;
+            padding: 4px;
+        }
+
+        .header-blue {
+            color: #000;
+        }
+
+        /* A utility container for maintaining block structures */
+        .block {
+            display: block;
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="border: 2px solid #000; padding: 0;">
+        <table style="margin-bottom: 0;">
+            <tr>
+                <td class="no-border bold" style="width: 30%;">
+                    <span class="block"
+                        th:text="${invoice.customLabels != null && invoice.customLabels.containsKey('headerMobileEmail') ? invoice.customLabels.get('headerMobileEmail') : 'Mob-9934115761'}">Mob-9934115761</span>
+                    <span class="block"
+                        th:if="${invoice.customLabels == null || !invoice.customLabels.containsKey('headerMobileEmail')}">E
+                        mail -Rajan20f@gmail.com</span>
+                </td>
+                <td class="no-border text-center bold header-blue" style="width: 40%; font-size: 13px;">
+                    <u><span
+                            th:text="${invoice.customLabels != null && invoice.customLabels.containsKey('headerTaxInvoice') ? invoice.customLabels.get('headerTaxInvoice') : 'TAX INVOICE'}">TAX
+                            INVOICE</span></u>
+                </td>
+                <td class="no-border text-center" style="width: 30%; border-left: 1px solid #000; padding-left: 2px;">
+                    <span class="block">Original for Buyer</span>
+                    <span class="block">Duplicate for Transporter</span>
+                    <span class="block">Triplicate for Supporter</span>
+                </td>
+            </tr>
+        </table>
+
+        <table style="border-top: 1px solid #000; border-bottom: 1px solid #000; margin-bottom: 0;">
+            <tr>
+                <td class="text-center bold header-blue no-border" style="font-size: 20px; padding: 6px;">
+                    <span
+                        th:text="${invoice.customLabels != null && invoice.customLabels.containsKey('companyName') ? invoice.customLabels.get('companyName') : 'MAA BHAWANI TRADERS'}">MAA
+                        BHAWANI TRADERS</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center bold no-border" style="padding: 2px;">
+                    <span
+                        th:text="${invoice.customLabels != null && invoice.customLabels.containsKey('companyAddress') ? invoice.customLabels.get('companyAddress') : 'Near Bijli Office, BDO Road Gomia, P.O- IE Gomia Dist-Bokaro'}">Company
+                        Address</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center bold no-border" style="border-top: 1px solid #000; padding: 4px;">
+                    <span
+                        th:text="${invoice.customLabels != null && invoice.customLabels.containsKey('companyGstin') ? invoice.customLabels.get('companyGstin') : 'GSTIN/UIN: 20AOFPY3578Q1Z5 PAN number : AOFPY3578Q State Name : Jharkhand, Code : 20'}">GSTIN</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-right bold no-border" style="border-top: 1px solid #000; padding: 2px 6px;">
+                    <span
+                        th:text="${invoice.customLabels != null && invoice.customLabels.containsKey('companyPo') ? invoice.customLabels.get('companyPo') : 'PO NO. 4500777226'}">PO
+                        NO</span>
+                </td>
+            </tr>
+        </table>
+
+        <table style="margin-bottom: 0; border-bottom: 1px solid #000;">
+            <tr>
+                <td class="no-border" style="width: 50%; border-right: 1px solid #000; padding: 4px;">
+                    <span class="bold block">Name &amp; Address of the Consignee:</span>
+                    <span class="block" th:text="${invoice.consigneeName}">Consignee Name</span>
+                    <span class="block" th:text="${invoice.consigneeAddress}">Consignee Address</span>
+                    <span class="block" style="margin-top: 2px;">GSTIN/UIN :: <span
+                            th:text="${invoice.consigneeGstin}">GSTIN</span> Code : <span
+                            th:text="${invoice.consigneeCode}">Code</span></span>
+                </td>
+                <td class="no-border" style="width: 50%; padding: 4px;">
+                    <span class="block"><span class="bold">Invoice No.: </span><span
+                            th:text="${invoice.invoiceNo}">Invoice
+                            No</span></span>
+                    <span class="block"><span class="bold">Mode of Transportation: </span><span
+                            th:text="${invoice.modeOfTransport}">Mode of Transport</span></span>
+                    <span class="block"><span class="bold">Date: </span><span
+                            th:text="${invoice.date}">Date</span></span>
+                </td>
+            </tr>
+        </table>
+
+        <table style="border-bottom: 1px solid #000; margin-bottom: 0;">
+            <tr>
+                <td class="no-border bold" style="padding: 4px; width: 50%; border-right: 1px solid #000;">FROM: <span
+                        th:text="${invoice.fromLocation}">From
+                        Location</span></td>
+                <td class="no-border bold" style="padding: 4px; width: 50%;">TO: <span
+                        th:text="${invoice.toLocation}">To
+                        Location</span></td>
+            </tr>
+        </table>
+
+        <table style="border-bottom: 1px solid #000; margin-bottom: 0;">
+            <thead>
+                <tr>
+                    <th class="td-border bold text-center" style="border-top: none; padding: 4px;">CHALLAN NO.</th>
+                    <th class="td-border bold text-center" style="border-top: none; padding: 4px;">DATE</th>
+                    <th class="td-border bold text-center" style="border-top: none; padding: 4px;">TRUCK NO.</th>
+                    <th class="td-border bold text-center" style="border-top: none; padding: 4px;">HSN Code</th>
+                    <th class="td-border bold text-center" style="border-top: none; padding: 4px;">Weight</th>
+                    <th class="td-border bold text-center" style="border-top: none; padding: 4px;">RATE PER TRIP</th>
+                    <th class="td-border bold text-center" style="border-top: none; padding: 4px;">AMOUNT (Rs.)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${invoice.challanItems}">
+                    <td class="td-border text-center" style="border-top: none; border-bottom: none; padding: 4px;"
+                        th:text="${item.challanNo}"></td>
+                    <td class="td-border text-center" style="border-top: none; border-bottom: none; padding: 4px;"
+                        th:text="${item.date}"></td>
+                    <td class="td-border text-center" style="border-top: none; border-bottom: none; padding: 4px;"
+                        th:text="${item.truckNo}"></td>
+                    <td class="td-border text-center" style="border-top: none; border-bottom: none; padding: 4px;"
+                        th:text="${item.hsnCode}"></td>
+                    <td class="td-border text-center" style="border-top: none; border-bottom: none; padding: 4px;"
+                        th:text="${item.weight}"></td>
+                    <td class="td-border text-center" style="border-top: none; border-bottom: none; padding: 4px;"
+                        th:text="${item.ratePerTr}"></td>
+                    <td class="td-border text-center" style="border-top: none; border-bottom: none; padding: 4px;"
+                        th:text="${item.amount}"></td>
+                </tr>
+                <tr>
+                    <td class="td-border" colspan="4" style="border-bottom: none; padding: 4px;">
+                        <u><span class="bold block">Bank Details:</span></u>
+                        <span class="block">Bank Name: <span th:text="${invoice.bankName}">Bank Name</span>, Branch:
+                            <span th:text="${invoice.bankBranch}">Branch</span></span>
+                        <span class="block">Bank Account No.: <span th:text="${invoice.bankAccountNo}">Acc No</span> |
+                            IFSC
+                            Code: <span th:text="${invoice.bankIfscCode}">IFSC</span></span>
+                    </td>
+                    <td class="td-border bold text-right" colspan="2" style="padding: 4px; vertical-align: bottom;">
+                        Total Invoice
+                        Value:
+                    </td>
+                    <td class="td-border bold text-center" style="padding: 4px; vertical-align: bottom;"
+                        th:text="${invoice.totalInvoiceValue}">Total</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table style="border-bottom: 2px solid #000; margin-bottom: 0;">
+            <tr>
+                <td class="bold no-border" style="padding: 4px;">
+                    Invoice Value in Words: <span th:text="${invoice.invoiceValueInWords}">Words</span>
+                </td>
+            </tr>
+        </table>
+
+        <table style="border-bottom: 2px solid #000; margin-bottom: 0;">
+            <tr>
+                <td class="no-border" style="width: 50%; border-right: 1px solid #000; padding: 4px;">
+                    <span class="bold block" style="margin-bottom: 4px;">Credit on input tax on goods and services used
+                        in
+                        supplying the services has not been taken.</span>
+                </td>
+                <td class="no-border" style="width: 50%; padding: 0;">
+                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 0;">
+                        <tr>
+                            <td class="no-border bold text-right" style="padding: 2px 4px; border-bottom: none;">TAXABLE
+                                VALUE</td>
+                            <td class="no-border text-center" style="padding: 2px 4px; border-bottom: none;"
+                                th:text="${invoice.taxableValue}">
+                                0.0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="no-border text-right" style="padding: 2px 4px; border-bottom: none;">GROSS
+                                FREIGHT:</td>
+                            <td class="no-border text-center" style="padding: 2px 4px; border-bottom: none;"
+                                th:text="${invoice.grossFreight}">
+                                0.0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="no-border text-right" style="padding: 2px 4px; border-bottom: none;">
+                                IGST @ <span th:text="${invoice.igstPercentage}"></span>%:
+                            </td>
+                            <td class="no-border text-center" style="padding: 2px 4px; border-bottom: none;"
+                                th:text="${invoice.igstAmount}">0.0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="no-border bold text-right" style="padding: 2px 4px; border-bottom: none;">TAX
+                                PAYABLE BY CONSIGNEE:</td>
+                            <td class="no-border text-center" style="padding: 2px 4px; border-bottom: none;"
+                                th:text="${invoice.taxPayable}">0.0
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+        <table style="margin-bottom: 0;">
+            <tr>
+                <td class="no-border" style="width: 65%; padding: 4px;">
+                    <span class="bold block" style="margin-bottom: 2px;">Declaration:</span>
+                    <span class="block" style="margin-bottom: 4px;">We hereby certify that Cenvat credit on input
+                        services used for providing
+                        taxable<br />
+                        service, has not been taken under the provisions on Cenvat Credit rules 2004.</span>
+                    <span class="block">The GST is to be paid under reverse charge mechanism by the recipient<br />
+                        of service.</span>
+                </td>
+                <td class="no-border text-right" style="width: 35%; padding: 4px; vertical-align: top;">
+                    <span class="bold block"
+                        th:text="${invoice.customLabels != null && invoice.customLabels.containsKey('forCompanyTitle') ? invoice.customLabels.get('forCompanyTitle') : 'For: MAA BHAWANI TRADERS'}">For:
+                        MAA BHAWANI TRADERS</span>
+                    <br /><br /><br /><br /><br />
+                    <span class="bold block"
+                        th:text="${invoice.customLabels != null && invoice.customLabels.containsKey('authSignatoryTitle') ? invoice.customLabels.get('authSignatoryTitle') : 'Authorised signatory'}">Authorised
+                        signatory</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>
