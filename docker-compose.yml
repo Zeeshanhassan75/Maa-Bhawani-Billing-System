@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: maabhawani-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./BACKEND-SPRINGBOOT
+      dockerfile: Dockerfile
+    container_name: maabhawani-backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/maabhawanibilling
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./FRONTEND-REACT
+      dockerfile: Dockerfile
+    container_name: maabhawani-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  mongodb_data:

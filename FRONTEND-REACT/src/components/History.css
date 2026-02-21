@@ -1,0 +1,140 @@
+.history-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.filters-panel {
+    padding: 1.5rem;
+}
+
+.filters-panel .form-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+}
+
+.filters-panel .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.filters-panel .input-group label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.filters-panel .input-group input {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-family: inherit;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.filters-panel .input-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.history-table th {
+    background-color: rgba(15, 23, 42, 0.02);
+    padding: 1rem 1.5rem;
+    text-align: left;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.history-table td {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    vertical-align: middle;
+}
+
+.history-table tr:hover {
+    background-color: rgba(248, 250, 252, 0.5);
+}
+
+.history-table tr:last-child td {
+    border-bottom: none;
+}
+
+.font-medium {
+    font-weight: 500;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+.text-primary {
+    color: var(--primary-color);
+}
+
+.action-buttons {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.5rem 0.875rem;
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-pdf {
+    background-color: #fee2e2;
+    color: #b91c1c;
+}
+
+.btn-pdf:hover {
+    background-color: #fecaca;
+    transform: translateY(-1px);
+}
+
+.btn-excel {
+    background-color: #dcfce7;
+    color: #15803d;
+}
+
+.btn-excel:hover {
+    background-color: #bbf7d0;
+    transform: translateY(-1px);
+}
+
+.btn-print {
+    background-color: var(--bg-sidebar);
+    color: white;
+}
+
+.btn-print:hover {
+    background-color: #1e1b4b;
+    transform: translateY(-1px);
+}
+
+.loading-state,
+.empty-state {
+    padding: 4rem 2rem;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1.125rem;
+}

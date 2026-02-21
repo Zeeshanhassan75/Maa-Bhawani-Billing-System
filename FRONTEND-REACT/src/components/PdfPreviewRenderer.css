@@ -1,0 +1,240 @@
+.pdf-preview-container {
+    background-color: #e2e8f0;
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: auto;
+    box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+    width: 100%;
+}
+
+.pdf-page-wrapper {
+    position: relative;
+    width: 794px;
+    height: 1123px;
+    background: white;
+    box-shadow: var(--shadow-lg);
+}
+
+.pdf-page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 40px;
+    font-family: 'Calibri', 'Inter', sans-serif;
+    font-size: 13px;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Base resets for inputs to look like text in preview */
+.preview-input {
+    border: 1px dashed transparent;
+    background: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+    padding: 0;
+    transition: all 0.2s;
+    resize: none;
+    overflow: hidden;
+}
+
+.preview-input:hover,
+.preview-input:focus {
+    border-bottom: 1px dashed var(--primary-color);
+    background-color: rgba(37, 99, 235, 0.05);
+    outline: none;
+}
+
+.preview-textarea {
+    display: block;
+    width: 100%;
+    line-height: normal;
+}
+
+.inline-input-preview {
+    display: inline-block;
+    min-width: 40px;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.w-full-inline {
+    width: calc(100% - 150px);
+}
+
+.w-16 {
+    width: 40px;
+}
+
+.w-20 {
+    width: 60px;
+}
+
+.w-32 {
+    width: 90px;
+}
+
+.w-40 {
+    width: 120px;
+}
+
+.w-48 {
+    width: 150px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+/* Grid Layouts */
+.pdf-header-grid,
+.pdf-details-grid {
+    display: grid;
+    border: 1px solid #000;
+    border-bottom: none;
+}
+
+.pdf-header-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.pdf-details-grid {
+    grid-template-columns: 1fr 1fr;
+}
+
+.pdf-cell {
+    padding: 4px;
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+}
+
+.pdf-cell:last-child {
+    border-right: none;
+}
+
+.pdf-details-grid>.pdf-cell:nth-child(even) {
+    border-right: none;
+}
+
+.align-left {
+    text-align: left;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.pdf-tax-title-container {
+    display: flex;
+    justify-content: center;
+}
+
+.pdf-company-section {
+    text-align: center;
+    border: 1px solid #000;
+    border-bottom: none;
+    padding: 4px;
+}
+
+.pdf-company-name-container {
+    font-size: 24px;
+    color: blue;
+    font-weight: bold;
+}
+
+/* Items Table */
+.pdf-items-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: 1px solid #000;
+    border-bottom: none;
+}
+
+.pdf-items-table input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.pdf-items-table th,
+.pdf-items-table td {
+    border-right: 1px solid #000;
+    padding: 4px;
+}
+
+.pdf-items-table th:last-child,
+.pdf-items-table td:last-child {
+    border-right: none;
+}
+
+.pdf-items-table th {
+    border-bottom: 1px solid #000;
+}
+
+.pdf-bank-row td {
+    border-top: 1px solid #000;
+}
+
+/* Words */
+.pdf-words-section {
+    border: 1px solid #000;
+    padding: 4px;
+    border-bottom: none;
+}
+
+/* Tax Grid */
+.pdf-tax-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    border: 1px solid #000;
+}
+
+.pdf-tax-left {
+    padding: 4px;
+    border-right: 1px solid #000;
+}
+
+.pdf-inner-tax-table {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.pdf-inner-tax-table td {
+    padding: 2px;
+}
+
+.pdf-declaration {
+    margin-top: 10px;
+    font-size: 13px;
+}
+
+.pdf-tax-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 4px;
+    align-items: center;
+}
+
+.pdf-signature-space {
+    height: 60px;
+}

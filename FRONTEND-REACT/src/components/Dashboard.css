@@ -1,0 +1,71 @@
+.sidebar-footer {
+    margin-top: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1rem;
+}
+
+.top-navbar {
+    background-color: var(--bg-sidebar);
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.navbar-brand {
+    font-size: 1.25rem;
+    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: 1px;
+}
+
+.navbar-menu {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-btn:hover,
+.nav-btn.active {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.navbar-actions {
+    display: flex;
+    align-items: center;
+}
+
+.btn-logout {
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.btn-logout:hover {
+    background-color: rgba(239, 68, 68, 0.1);
+}

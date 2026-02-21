@@ -1,0 +1,32 @@
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top Navbar global layout overriding old Sidebar layout */
+.layout-container-top {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content-top {
+  flex: 1;
+  background-color: var(--bg-main);
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+/* Common Header Styles inside Dashboard views */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.page-title {
+  font-size: 2rem;
+  color: var(--text-primary);
+}
