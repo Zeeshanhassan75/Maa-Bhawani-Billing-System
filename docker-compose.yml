@@ -4,10 +4,11 @@ services:
   mongodb:
     image: mongo:latest
     container_name: maabhawani-mongodb
+    command: mongod --port 27100
     ports:
-      - "27017:27017"
+      - "27100:27100"
     volumes:
-      - mongodb_data:/data/db
+      - maabhawanibilling_db_data:/data/db
     restart: unless-stopped
 
   backend:
@@ -20,7 +21,7 @@ services:
     depends_on:
       - mongodb
     environment:
-      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/maabhawanibilling
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27100/maabhawanibilling
     restart: unless-stopped
 
   frontend:
@@ -35,4 +36,4 @@ services:
     restart: unless-stopped
 
 volumes:
-  mongodb_data:
+  maabhawanibilling_db_data:

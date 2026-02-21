@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { fetchApi } from '../utils/api';
 import './Login.css';
 
 const Login = ({ onLogin }) => {
@@ -14,9 +15,8 @@ const Login = ({ onLogin }) => {
         setError('');
 
         try {
-            const response = await fetch('http://localhost:8080/api/auth/login', {
+            const response = await fetchApi('http://localhost:8080/api/auth/login', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password }),
             });
 

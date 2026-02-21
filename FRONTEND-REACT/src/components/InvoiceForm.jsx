@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PdfPreviewRenderer from './PdfPreviewRenderer';
+import { fetchApi } from '../utils/api';
 import './InvoiceForm.css';
 
 const getTodayDateString = () => {
@@ -195,12 +196,8 @@ const InvoiceForm = ({ onViewHistory }) => {
         };
 
         try {
-            const res = await fetch('http://localhost:8080/api/invoices', {
+            const res = await fetchApi('http://localhost:8080/api/invoices', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                },
                 body: JSON.stringify(formattedData)
             });
             if (res.ok) {

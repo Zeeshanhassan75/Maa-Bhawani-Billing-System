@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { fetchApi } from '../utils/api';
 import './History.css';
 
 const History = () => {
@@ -16,11 +17,7 @@ const History = () => {
 
     const fetchInvoices = async () => {
         try {
-            const res = await fetch('http://localhost:8080/api/invoices', {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                }
-            });
+            const res = await fetchApi('http://localhost:8080/api/invoices');
             if (res.ok) {
                 const data = await res.json();
                 setInvoices(data);
@@ -34,11 +31,7 @@ const History = () => {
 
     const downloadFile = async (id, type) => {
         try {
-            const res = await fetch(`http://localhost:8080/api/invoices/${id}/${type}`, {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                }
-            });
+            const res = await fetchApi(`http://localhost:8080/api/invoices/${id}/${type}`);
             if (res.ok) {
                 const blob = await res.blob();
                 const url = window.URL.createObjectURL(blob);
@@ -54,8 +47,19 @@ const History = () => {
         }
     };
 
-    const handlePrint = (id) => {
-        window.open(`http://localhost:8080/api/invoices/${id}/pdf`, '_blank');
+    const handlePrint = async (id) => {
+        try {
+            const res = await fetchApi(`http://localhost:8080/api/invoices/${id}/pdf`);
+            if (res.ok) {
+                const blob = await res.blob();
+                const url = window.URL.createObjectURL(blob);
+                window.open(url, '_blank');
+                // Note: we might leak memory if we don't revoke the URL,
+                // but revoking it immediately might close the printing popup prematurely
+            }
+        } catch (err) {
+            console.error('Error printing PDF:', err);
+        }
     };
 
     const filteredInvoices = invoices.filter(inv => {
