@@ -17,7 +17,7 @@ const History = () => {
 
     const fetchInvoices = async () => {
         try {
-            const res = await fetchApi('http://localhost:8080/api/invoices');
+            const res = await fetchApi('/invoices');
             if (res.ok) {
                 const data = await res.json();
                 setInvoices(data);
@@ -31,7 +31,7 @@ const History = () => {
 
     const downloadFile = async (id, type) => {
         try {
-            const res = await fetchApi(`http://localhost:8080/api/invoices/${id}/${type}`);
+            const res = await fetchApi(`/invoices/${id}/${type}`);
             if (res.ok) {
                 const blob = await res.blob();
                 const url = window.URL.createObjectURL(blob);
@@ -49,7 +49,7 @@ const History = () => {
 
     const handlePrint = async (id) => {
         try {
-            const res = await fetchApi(`http://localhost:8080/api/invoices/${id}/pdf`);
+            const res = await fetchApi(`/invoices/${id}/pdf`);
             if (res.ok) {
                 const blob = await res.blob();
                 const url = window.URL.createObjectURL(blob);

@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/invoices")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "${cors.allowed.origins}")
 public class InvoiceController {
 
     @Autowired

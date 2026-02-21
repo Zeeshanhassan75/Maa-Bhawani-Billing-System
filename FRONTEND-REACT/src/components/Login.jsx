@@ -3,6 +3,8 @@ import { fetchApi } from '../utils/api';
 import './Login.css';
 
 const Login = ({ onLogin }) => {
+    const [isLogin, setIsLogin] = useState(true);
+    const [fullname, setFullname] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -14,10 +16,13 @@ const Login = ({ onLogin }) => {
         setLoading(true);
         setError('');
 
+        const endpoint = isLogin ? '/auth/login' : '/auth/register';
+        const body = isLogin ? { username, password } : { fullname, username, password };
+
         try {
-            const response = await fetchApi('http://localhost:8080/api/auth/login', {
+            const response = await fetchApi(endpoint, {
                 method: 'POST',
-                body: JSON.stringify({ username, password }),
+                body: JSON.stringify(body),
             });
 
             if (response.ok) {
@@ -25,7 +30,7 @@ const Login = ({ onLogin }) => {
                 localStorage.setItem('token', data.token);
                 onLogin();
             } else {
-                setError('Invalid username or password');
+                setError(isLogin ? 'Invalid username or password' : 'Username already exists or invalid data');
             }
         } catch (err) {
             setError('Could not connect to the server');
@@ -40,11 +45,25 @@ const Login = ({ onLogin }) => {
                 <div className="login-header">
                     <h1>MAA BHAWANI</h1>
                     <p>BILLING SYSTEM</p>
+                    <h2 className="auth-mode-title">{isLogin ? 'Sign In' : 'Create Account'}</h2>
                 </div>
 
                 {error && <div className="error-message">{error}</div>}
 
                 <form onSubmit={handleSubmit} className="login-form">
+                    {!isLogin && (
+                        <div className="form-group">
+                            <label htmlFor="fullname">Full Name</label>
+                            <input
+                                type="text"
+                                id="fullname"
+                                value={fullname}
+                                onChange={(e) => setFullname(e.target.value)}
+                                placeholder="Enter your full name"
+                                required={!isLogin}
+                            />
+                        </div>
+                    )}
                     <div className="form-group">
                         <label htmlFor="username">Username</label>
                         <input
@@ -52,7 +71,7 @@ const Login = ({ onLogin }) => {
                             id="username"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
-                            placeholder="Enter username (admin)"
+                            placeholder="Enter username"
                             required
                         />
                     </div>
@@ -64,7 +83,7 @@ const Login = ({ onLogin }) => {
                                 id="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                placeholder="Enter password (password123)"
+                                placeholder="Enter password"
                                 required
                             />
                             <button
@@ -78,8 +97,24 @@ const Login = ({ onLogin }) => {
                         </div>
                     </div>
                     <button type="submit" className="btn-primary" disabled={loading}>
-                        {loading ? 'Logging in...' : 'Sign In'}
+                        {loading ? (isLogin ? 'Logging in...' : 'Registering...') : (isLogin ? 'Sign In' : 'Register')}
                     </button>
+
+                    <div className="auth-toggle">
+                        <p>
+                            {isLogin ? "Don't have an account? " : "Already have an account? "}
+                            <button
+                                type="button"
+                                className="btn-link"
+                                onClick={() => {
+                                    setIsLogin(!isLogin);
+                                    setError('');
+                                }}
+                            >
+                                {isLogin ? 'Register' : 'Sign In'}
+                            </button>
+                        </p>
+                    </div>
                 </form>
             </div>
         </div>

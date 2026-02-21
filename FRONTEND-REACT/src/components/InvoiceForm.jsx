@@ -196,7 +196,7 @@ const InvoiceForm = ({ onViewHistory }) => {
         };
 
         try {
-            const res = await fetchApi('http://localhost:8080/api/invoices', {
+            const res = await fetchApi('/invoices', {
                 method: 'POST',
                 body: JSON.stringify(formattedData)
             });

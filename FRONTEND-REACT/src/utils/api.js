@@ -1,6 +1,6 @@
 export const fetchApi = async (url, options = {}) => {
-    // Determine the base URL
-    const baseUrl = 'http://localhost:8080/api';
+    // Determine the base URL from .env or fallback
+    const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api';
     const fullUrl = url.startsWith('http') ? url : `${baseUrl}${url.startsWith('/') ? '' : '/'}${url}`;
 
     // Get the token from local storage
